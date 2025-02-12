@@ -1,4 +1,3 @@
-import { validate } from "class-validator";
 import { AppDataSource } from "../config/database";
 import { AuthDTO } from "../dto/auth-DTO";
 import { User } from "../entities/user-entity";
@@ -7,7 +6,9 @@ interface LoginResponse {
   id: string;
   token: string;
 }
+
 const UserRepository = AppDataSource.getRepository(User);
+
 export class AuthService {
   static async login(loginData: AuthDTO): Promise<LoginResponse> {
     const { email, password } = loginData;

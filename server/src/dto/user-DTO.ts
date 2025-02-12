@@ -10,5 +10,5 @@ export class UserDTO {
   password: string;
 
   @IsOptional()
-  profilePhoto: string;
+  profilePhoto?: string;
 }
