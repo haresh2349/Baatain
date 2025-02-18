@@ -31,11 +31,12 @@ export const isUserLoggedIn = async (
     const user = await UserRepository.findOneBy({ id: decodedToken?.id });
 
     if (!user) {
-      throw new APIError(401, "Invali token");
+      return next(new APIError(401, "Invalid token"));
     }
-
-    req.user = { id: decodedToken?.id, email: decodedToken?.email };
-
+    (req as Request).user = {
+      id: decodedToken?.id,
+      email: decodedToken?.email,
+    };
     next();
   } catch (error) {
     throw new APIError(401, "Invalid token");

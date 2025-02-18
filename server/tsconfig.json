@@ -8,6 +8,28 @@
     "target": "ES6",
     "strict": true,
     "emitDecoratorMetadata": true,
-    "experimentalDecorators": true
-  }
+    "experimentalDecorators": true,
+    "strictPropertyInitialization": false,
+    "typeRoots": ["./node_modules/@types", "./src/types"]
+  },
+  "include": ["src/**/*.ts", "src/types/index.d.ts"]
 }
+
+// {
+//   "compilerOptions": {
+//     "outDir": "./dist",
+//     "rootDir": "./src",
+//     "moduleResolution": "node",
+//     "module": "CommonJS",
+//     "esModuleInterop": true,
+//     "target": "ES6",
+//     "strict": true,
+//     "emitDecoratorMetadata": true,
+//     "experimentalDecorators": true,
+//     "strictPropertyInitialization": false,
+//     "typeRoots": ["./node_modules/@types"],
+//     "types": ["node", "express"]
+//   },
+//   "include": ["src"],
+//   "exclude": ["node_modules", "dist"]
+// }

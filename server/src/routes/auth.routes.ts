@@ -6,5 +6,6 @@ import { AuthController } from "../controllers/auth-controller";
 const router = Router();
 
 router.route("/login").post(AsyncHandler(AuthController.Login));
+router.route("/signup").post(AsyncHandler(AuthController.signup));
 
 export default router;

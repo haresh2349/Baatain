@@ -1,9 +1,9 @@
 import {
   Column,
   CreateDateColumn,
+  Entity,
   JoinColumn,
   ManyToOne,
-  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
@@ -15,6 +15,8 @@ export enum MessageType {
   VIDEO = "video",
   FILE = "file",
 }
+
+@Entity("messages")
 export class Message {
   @PrimaryGeneratedColumn("uuid")
   id: string;
@@ -27,25 +29,25 @@ export class Message {
     enum: MessageType,
     default: MessageType.TEXT,
   })
-  type: MessageType;
+  type?: string;
 
-  @Column()
-  mediaURL: string;
+  @Column({ nullable: true })
+  mediaURL?: string;
 
   @Column({ default: false })
-  isRead: boolean;
+  isRead?: boolean;
 
-  @ManyToOne(() => User)
-  @JoinColumn()
+  @ManyToOne(() => User, { eager: true })
+  @JoinColumn({ name: "sender_id" })
   sender: User;
 
-  @ManyToOne(() => User)
-  @JoinColumn()
+  @ManyToOne(() => User, { eager: true })
+  @JoinColumn({ name: "receiver_id" })
   receiver: User;
 
   @CreateDateColumn()
-  createdAt: Date;
+  createdAt?: Date;
 
   @UpdateDateColumn()
-  updatedAt: Date;
+  updatedAt?: Date;
 }

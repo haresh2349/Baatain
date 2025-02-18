@@ -9,25 +9,6 @@ type LoginResponse = {
 };
 
 export class UserService {
-  static async register(userData: UserDTO): Promise<User> {
-    const { username, email, password, profilePhoto } = userData;
-
-    const existingUser = await UserRepository.findOne({ where: { email } });
-
-    if (existingUser) {
-      throw new Error("Email is already registered");
-    }
-
-    const user = await UserRepository.create({
-      username,
-      email,
-      password,
-      profilePhoto,
-      status: UserStatus.OFFLINE,
-    });
-    return await UserRepository.save(user);
-  }
-
   static async fetchAllUsers() {
     return await UserRepository.find();
   }

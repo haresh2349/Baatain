@@ -1,8 +1,9 @@
 import { validate } from "class-validator";
 import { AppDataSource } from "../config/database";
 import { AuthDTO } from "../dto/auth-DTO";
-import { User } from "../entities/user-entity";
+import { User, UserStatus } from "../entities/user-entity";
 import jwt from "jsonwebtoken";
+import { UserDTO } from "../dto/user-DTO";
 interface LoginResponse {
   id: string;
   token: string;
@@ -28,5 +29,24 @@ export class AuthService {
       { expiresIn: "1d" }
     );
     return { token, id: existingUser?.id };
+  }
+
+  static async signup(userData: UserDTO): Promise<User> {
+    const { username, email, password, profilePhoto } = userData;
+
+    const existingUser = await UserRepository.findOne({ where: { email } });
+
+    if (existingUser) {
+      throw new Error("Email is already registered");
+    }
+
+    const user = await UserRepository.create({
+      username,
+      email,
+      password,
+      profilePhoto,
+      status: UserStatus.OFFLINE,
+    });
+    return await UserRepository.save(user);
   }
 }
