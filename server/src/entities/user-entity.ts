@@ -7,6 +7,7 @@ import {
   BeforeInsert,
 } from "typeorm";
 import bcrypt from "bcryptjs";
+import { Exclude } from "class-transformer";
 
 export enum UserStatus {
   ONLINE = "online",
@@ -25,6 +26,7 @@ export class User {
   email: string;
 
   @Column()
+  @Exclude()
   password: string;
 
   @Column({ nullable: true })

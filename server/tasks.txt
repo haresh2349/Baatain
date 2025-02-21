@@ -17,5 +17,12 @@ Chat :
         send message
         Fetch conversation
 
+    User Profile : 
+        sent/received documents
+        Logout
 Socket Integration
 
+APIs Completed : 
+1. login/Signup
+2.send message
+3.Fetch all users

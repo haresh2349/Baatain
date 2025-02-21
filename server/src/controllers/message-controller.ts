@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { APIError } from "../utils/api-error";
 import { Message } from "../entities/mesage-entity";
+import { instanceToPlain } from "class-transformer";
 import { MessagePayload, MessageService } from "../services/message-service";
 
 export class MessageController {

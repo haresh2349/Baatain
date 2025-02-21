@@ -1,5 +1,4 @@
 import { AppDataSource } from "../config/database";
-import { UserDTO } from "../dto/user-DTO";
 import { User, UserStatus } from "../entities/user-entity";
 const UserRepository = AppDataSource.getRepository(User);
 
@@ -9,7 +8,11 @@ type LoginResponse = {
 };
 
 export class UserService {
-  static async fetchAllUsers() {
-    return await UserRepository.find();
+  static async fetchAllUsers(skip: number, take: number) {
+    return await UserRepository.findAndCount({
+      skip,
+      take,
+      order: { createdAt: "DESC" },
+    });
   }
 }

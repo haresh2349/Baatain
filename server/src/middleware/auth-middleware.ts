@@ -18,7 +18,7 @@ export const isUserLoggedIn = async (
   const token = req.header("Authorization")?.replace("Bearer ", "");
 
   if (!token) {
-    throw new APIError(401, "Unauthorized request!");
+    return next(new APIError(401, "Unauthorized request!"));
   }
 
   let decodedToken = null;
@@ -29,11 +29,11 @@ export const isUserLoggedIn = async (
     ) as TokenPayload;
 
     const user = await UserRepository.findOneBy({ id: decodedToken?.id });
-
+    console.log(user, "user");
     if (!user) {
       return next(new APIError(401, "Invalid token"));
     }
-    (req as Request).user = {
+    req.user = {
       id: decodedToken?.id,
       email: decodedToken?.email,
     };
