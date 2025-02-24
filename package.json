@@ -1,0 +1,15 @@
+{
+  "name": "baatain",
+  "private": true,
+  "workspaces": [
+    "client",
+    "server"
+  ],
+  "scripts": {
+    "dev": "concurrently \"yarn workspace client start\" \"yarn workspace server start\"",
+    "build": "yarn workspaces run build"
+  },
+  "devDependencies": {
+    "concurrently": "^8.0.0"
+  }
+}
